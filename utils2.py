@@ -20,21 +20,9 @@ def get_management_api_token(domain, client_id, client_secret):
     }
     headers = {'content-type': 'application/json'}
     response = requests.post(url, json=payload, headers=headers)
-    
-    # Print detailed response for debugging
-    print(f"Response Status Code: {response.status_code}")
-    print(f"Response Body: {response.json()}")
-    
+    print(f"Token response: {response.json()}")  # Debugging
     return response.json().get('access_token')
 
-token = get_management_api_token(domain, client_id, client_secret)
-print(f"This is the token: {token}")
-
-
-###############################################################################################
-#################################
-"""use once to create user"""
-#################################
 def create_user(domain, token, email, password):
     url = f"https://{domain}/api/v2/users"
     payload = {
@@ -47,17 +35,9 @@ def create_user(domain, token, email, password):
         'content-type': 'application/json'
     }
     response = requests.post(url, json=payload, headers=headers)
+    print(f"Create user response: {response.json()}")  # Debugging
     return response.json()
 
-email = 'newuse1r@example.com'
-password = 'Pinkelephant2992'
-user = create_user(domain, token, email, password)
-print(f"This is the user that was created: {user}")
-###############################################################################################
-
-
-
-# extracting the token from the user's email
 def get_user_token(domain, client_id, username, password):
     url = f"https://{domain}/oauth/token"
     payload = {
@@ -69,9 +49,41 @@ def get_user_token(domain, client_id, username, password):
     }
     headers = {'content-type': 'application/json'}
     response = requests.post(url, json=payload, headers=headers)
+    print(f"Get user token response: {response.json()}")  # Debugging
     return response.json()
 
-print(f"trying last method,.,.")
-username = 'newuser@example.com'
-user_token = get_user_token(domain, client_id, username, password)
-print(user_token)
+# # Get the management API token
+# token = get_management_api_token(domain, client_id, client_secret)
+# print(f"This is the token: {token}")
+
+# # Create a user
+# email = 'newuser313@example.com'
+# password = 'ThisisProperOkay3134'
+# # user = create_user(domain, token, email, password)
+# # print(f"This is the user that was created: {user}")
+
+# # Get a user token
+# user_token = get_user_token(domain, client_id, email, password)
+# print("£")
+# print(f"This is the user token: {user_token}")
+
+
+
+# Get the management API token
+token = get_management_api_token(domain, client_id, client_secret)
+# print(f"This is the token: {token}")
+
+# Decode and print the token (for debugging)
+import jwt
+decoded_token = jwt.decode(token, options={"verify_signature": False})
+# print(f"Decoded token: {decoded_token}")
+
+# Create a user
+email = 'newuser33333333@example.com'
+password = 'Myfrozencartoon314'
+# user = create_user(domain, token, email, password)
+# print(f"This is the user that was created: {user}")
+
+# Get a user token
+user_token = get_user_token(domain, client_id, email, password)
+print(f"This is the user token: {user_token}")

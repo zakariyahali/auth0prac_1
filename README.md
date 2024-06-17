@@ -8,12 +8,6 @@ token = get_management_api_token(domain, client_id, client_secret)
 print(token)
 
 
-# Step 2: Create an Organization
-# Replace with the name of the organization you want to create
-organization_name = 'new-organization'
-organization = create_organization(domain, token, organization_name)
-print(organization)
-
 
 # Step 3: Create a User
 # Replace with the email and password for the new user
